@@ -40,6 +40,7 @@ public class CameraController : MonoBehaviour
         float mouseX = Input.GetAxis("Mouse X");
 		float mouseY = -Input.GetAxis("Mouse Y");
 
+        // This is the side to side visibility
 		rotY += mouseX * mouseSensitivity * Time.deltaTime;
         // Note: rotX is the up down visibility
 		rotX += mouseY * mouseSensitivity * Time.deltaTime;
@@ -52,13 +53,16 @@ public class CameraController : MonoBehaviour
 		    transform.rotation = localRotation;
         }
         
-        print(rotX);
+
+        Vector3 rot = Vector3.Normalize(new(rotX, rotY, 0));
+        print("Rotation vector: " + rot);
+
+        // Vector3 forward = new()
 
         // TODO: Get our current direction and apply it to the direction
         // Vector3 currentDirection = new(Math.Abs(rotX))
         
         if (Input.GetKey(KeyCode.A)) {
-
             velocity += accelerationFactor * Vector3.left * Time.deltaTime;
         }
         if (Input.GetKey(KeyCode.D)) {
